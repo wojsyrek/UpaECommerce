@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArchosServerSide.Migrations
 {
     [DbContext(typeof(ArchosDbContext))]
-    [Migration("20220511154458_eee")]
-    partial class eee
+    [Migration("20220511161201_KickOffDatabase23")]
+    partial class KickOffDatabase23
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,7 +233,7 @@ namespace ArchosServerSide.Migrations
                     b.HasOne("ArchosServerSide.Repositories.Entities.Employee", "Employee")
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ArchosServerSide.Repositories.Entities.Product", "Product")

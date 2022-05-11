@@ -231,7 +231,7 @@ namespace ArchosServerSide.Migrations
                     b.HasOne("ArchosServerSide.Repositories.Entities.Employee", "Employee")
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ArchosServerSide.Repositories.Entities.Product", "Product")

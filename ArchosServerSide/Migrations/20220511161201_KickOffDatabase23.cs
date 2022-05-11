@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ArchosServerSide.Migrations
 {
-    public partial class eee : Migration
+    public partial class KickOffDatabase23 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,7 +128,8 @@ namespace ArchosServerSide.Migrations
                         name: "FK_Orders_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Products_ProductId",
                         column: x => x.ProductId,
