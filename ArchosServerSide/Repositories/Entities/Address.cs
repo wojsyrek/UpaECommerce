@@ -1,4 +1,6 @@
-﻿namespace ArchosServerSide.Repositories.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ArchosServerSide.Repositories.Entities
 {
     public class Address
     {
@@ -7,9 +9,7 @@
         public string PostCode  { get; set; }
         public string Street { get; set; }
         public string HouseNumber { get; set; }
-        public string PersonId { get; set; }
-        public List<Employee> Employees { get; set; }
-        public List<Client> Clients { get; set; }
+        public List<Client> Client { get; set; }
    
     }
 }

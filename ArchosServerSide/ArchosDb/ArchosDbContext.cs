@@ -15,8 +15,21 @@ namespace ArchosServerSide.ArchosDb
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\mssqllocaldb;Database=ArchosDbMain3;Integrated Security=True");
+                @"Server=(localdb)\mssqllocaldb;Database=ArchosDb2;Integrated Security=True");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .HasOne(e => e.Employee)
+                .WithMany(e => e.Orders)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Address>()
+                .HasMany(e => e.Client)
+                .WithOne(e => e.Address)
+                .OnDelete(DeleteBehavior.Cascade);
+
+         
+        }
     }
 }

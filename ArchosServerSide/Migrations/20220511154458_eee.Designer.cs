@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArchosServerSide.Migrations
 {
     [DbContext(typeof(ArchosDbContext))]
-    [Migration("20220427172612_DbRepair")]
-    partial class DbRepair
+    [Migration("20220511154458_eee")]
+    partial class eee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,10 +37,6 @@ namespace ArchosServerSide.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HouseNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -116,9 +112,6 @@ namespace ArchosServerSide.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,8 +129,6 @@ namespace ArchosServerSide.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.ToTable("Employees");
                 });
@@ -223,18 +214,7 @@ namespace ArchosServerSide.Migrations
             modelBuilder.Entity("ArchosServerSide.Repositories.Entities.Client", b =>
                 {
                     b.HasOne("ArchosServerSide.Repositories.Entities.Address", "Address")
-                        .WithMany("Clients")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("ArchosServerSide.Repositories.Entities.Employee", b =>
-                {
-                    b.HasOne("ArchosServerSide.Repositories.Entities.Address", "Address")
-                        .WithMany("Employees")
+                        .WithMany("Client")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -253,7 +233,7 @@ namespace ArchosServerSide.Migrations
                     b.HasOne("ArchosServerSide.Repositories.Entities.Employee", "Employee")
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ArchosServerSide.Repositories.Entities.Product", "Product")
@@ -282,9 +262,7 @@ namespace ArchosServerSide.Migrations
 
             modelBuilder.Entity("ArchosServerSide.Repositories.Entities.Address", b =>
                 {
-                    b.Navigation("Clients");
-
-                    b.Navigation("Employees");
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("ArchosServerSide.Repositories.Entities.Category", b =>
