@@ -10,5 +10,6 @@
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<Order> Orders { get; set; }
+        public virtual List<Checkout> Checkouts { get; set; }
     }
 }

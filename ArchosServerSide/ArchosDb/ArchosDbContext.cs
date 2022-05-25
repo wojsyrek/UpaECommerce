@@ -5,6 +5,10 @@ namespace ArchosServerSide.ArchosDb
 {
     public class ArchosDbContext : DbContext
     {
+        public ArchosDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -28,7 +32,6 @@ namespace ArchosServerSide.ArchosDb
                 .HasMany(e => e.Client)
                 .WithOne(e => e.Address)
                 .OnDelete(DeleteBehavior.Cascade);
-
          
         }
     }
