@@ -15,12 +15,8 @@ namespace ArchosServerSide.ArchosDb
         public DbSet<Client> Clients { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\mssqllocaldb;Database=ArchosDb2;Integrated Security=True");
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()

@@ -1,4 +1,5 @@
 using ArchosServerSide.ArchosDb;
+using ArchosServerSide.Helpers;
 using ArchosServerSide.Interfaces.IServices;
 using ArchosServerSide.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ArchosDbContext>(o => o.UseSqlServer(builder.Configuration["ConnectionString"]));
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var app = builder.Build();
 
@@ -26,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 
