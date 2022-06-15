@@ -29,9 +29,9 @@ namespace ArchosServerSide.Controllers
 
         [Helpers.Authorize]
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var users = _account.GetAll();
+            var users = await _account.GetAll();
             return Ok(users);
         }
     }

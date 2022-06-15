@@ -24,11 +24,8 @@ namespace ArchosServerSide.Services
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
             var user = _context.Accounts.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
-
-            // return null if user not found
             if (user == null) return null;
 
-            // authentication successful so generate jwt token
             var token = generateJwtToken(user);
 
             return new AuthenticateResponse(user, token);
@@ -40,7 +37,10 @@ namespace ArchosServerSide.Services
             var key = Encoding.ASCII.GetBytes(_configuration["Secret"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", account.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] 
+                {
+                    new Claim("id", account.Id.ToString())
+                }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
